@@ -13,7 +13,7 @@ interface ServiceData {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './acceuil.component.html',
-  styleUrls: ['./acceuil.component.css']
+  styleUrls: ['./acceuil.component.css'],
 })
 export class AcceuilComponent {
   title = 'salon-beaute';
@@ -22,11 +22,12 @@ export class AcceuilComponent {
   services: any[] = [];
   apiUrl = 'http://localhost:3001'; // Remplacez ceci par l'URL de votre API
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<ServiceData>(`${this.apiUrl}/service/${this.page}/${this.size}`)
-      .subscribe(data => {
+    this.http
+      .get<ServiceData>(`${this.apiUrl}/services/${this.page}/${this.size}`)
+      .subscribe((data) => {
         this.services = data.services;
       });
   }
