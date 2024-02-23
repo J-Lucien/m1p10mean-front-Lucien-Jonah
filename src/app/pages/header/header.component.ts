@@ -15,7 +15,7 @@ import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { LoginComponent } from '../auth/login/login.component';
 import { LogoutConfirmationComponent } from '../logout-confirmation/logout-confirmation.component';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -34,36 +34,28 @@ import {MatBadgeModule} from '@angular/material/badge';
     TagModule,
     LoginComponent,
     CommonModule,
-    LogoutConfirmationComponent
+    LogoutConfirmationComponent,
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-
-  @Output() visible: boolean = false;
   @Output() confirmLogout = new EventEmitter<void>();
   isLoggedIn: boolean = true;
   showConfirmationModalLogout: boolean = false;
   user: any = {
     nom: 'Jonah',
-    prenom: 'Fitia'
+    prenom: 'Fitia',
   };
   decodedToken: any = '';
 
-  constructor(private dialog: MatDialog) {
-  }
-
-  toLogin() {
-    this.visible = true;
-  }
-
-  closeModal() {
-    this.visible = false;
-  }
+  constructor(private dialog: MatDialog) {}
 
   openDialog() {
     this.dialog.open(InscriptionComponent);
+  }
+  openDialogLogin() {
+    this.dialog.open(LoginComponent);
   }
 
   openConfirmationModal() {
@@ -74,5 +66,4 @@ export class HeaderComponent {
     localStorage.removeItem('token');
     window.location.href = '/';
   }
-
 }

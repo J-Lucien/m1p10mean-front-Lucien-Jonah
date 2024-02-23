@@ -1,46 +1,32 @@
-<div class="card flex justify-content-center">
-  <p-dialog
-    header="Se connecter"
-    [(visible)]="visible"
-    [modal]="true"
-    [style]="{
-      width: '40vw'
-    }"
-    [draggable]="false"
-    [resizable]="false"
-    (onHide)="onHide()"
-  >
-    <mat-form-field class="w-100">
-      <mat-label>Email</mat-label>
-      <input
-        type="email"
-        matInput
-        [formControl]="emailFormControl"
-        placeholder="Ex. pat@example.com"
-      />
-      @if (emailFormControl.hasError('email') &&
-      !emailFormControl.hasError('required')) {
-      <mat-error>Veuillez saisir une adresse e-mail valide</mat-error>
-      } @if (emailFormControl.hasError('required')) {
-      <mat-error>L'email est <strong>requis</strong></mat-error>
-      }
-    </mat-form-field>
-    <mat-form-field class="w-100">
-      <mat-label>Mot de passe</mat-label>
-      <input type="password" matInput [formControl]="passwordFormControl" />
-      @if (passwordFormControl.hasError('required')) {
-      <mat-error>Le mot de passe est <strong>requis</strong></mat-error>
-      }
-    </mat-form-field>
-    @if (!emailFormControl.touched || emailFormControl.invalid ||
-    !passwordFormControl.touched || emailFormControl.invalid ) {
-    <button class="float-end" mat-button disabled>Se connecter</button>
-    } @else {<button
-      (click)="seConnecter()"
-      class="float-end"
-      mat-raised-button
-    >
-      Se connecter</button
-    >}
-  </p-dialog>
+<div style="width: 40vw">
+  <h2 mat-dialog-title>Se connecter</h2>
+  <mat-dialog-content>
+    <form [formGroup]="loginFormGroup">
+      <mat-form-field class="w-100">
+        <mat-label>Email</mat-label>
+        <input
+          formControlName="email"
+          type="email"
+          matInput
+          placeholder="Ex. pat@example.com"
+        />
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Mot de passe</mat-label>
+        <input formControlName="password" type="password" matInput />
+      </mat-form-field>
+      <mat-error *ngIf="loginResponse && loginResponse.error">{{
+        loginResponse.message
+      }}</mat-error>
+      <button class="float-start" mat-button mat-dialog-close>Annuler</button>
+      <button
+        (click)="seConnecter()"
+        class="float-end"
+        mat-button
+        [disabled]="loginFormGroup.invalid"
+      >
+        Se connecter
+      </button>
+    </form>
+  </mat-dialog-content>
 </div>

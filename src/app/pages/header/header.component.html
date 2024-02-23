@@ -10,8 +10,8 @@
         <li><a routerLink="/manage/service">Gestion des services</a></li>
         <li><a href="#a-propos">A propos</a></li>
       </ul>
-      <ng-container *ngIf="isLoggedIn; else userLoggedIn">
-        <button class="btn" (click)="toLogin()">Connexion</button>
+      <ng-container *ngIf="this.isLoggedIn; else userLoggedIn">
+        <button class="btn" (click)="openDialogLogin()">Connexion</button>
         <button class="btn" (click)="openDialog()">Inscription</button>
       </ng-container>
       <ng-template #userLoggedIn>

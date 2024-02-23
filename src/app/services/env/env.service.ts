@@ -1,0 +1,16 @@
+import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class EnvService {
+  private baseUrl;
+  constructor() {
+    this.baseUrl = environment.apiUrl;
+  }
+
+  public getBaseUrl() {
+    return this.baseUrl;
+  }
+}
